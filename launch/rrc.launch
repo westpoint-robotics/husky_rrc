@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <node type="static_transform_publisher" pkg="tf2_ros" name="dummy2_utm_frame" args="587361 4582574 0 0 0 0 utm map" />
+
+  <arg name="laser_enabled" default="true"/>
+  <arg name="realsense_enabled" default="true"/>
+
+  <include file="$(find husky_gazebo)/launch/playpen.launch" />
+
+  <include file="$(find husky_gazebo)/launch/spawn_husky.launch">
+    <arg name="laser_enabled" value="$(arg laser_enabled)"/>
+    <arg name="realsense_enabled" value="$(arg realsense_enabled)"/>
+  </include>
+
+  
+  <include file="$(find husky_rrc)/launch/view_robot.launch" />
+  
+  <include file="$(find husky_rrc)/launch/cartographer_demo.launch" />
+  
+  <include file="$(find atak_bridge)/launch/nondcist_tak_bridge.launch" />
+  
+</launch>
